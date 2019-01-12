@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
 from rest_framework.generics import ListCreateAPIView
@@ -13,6 +14,7 @@ class HelloView(ListCreateAPIView):
     serializer_class = UserSerializer
 
     def get(self, request, *args, **kwargs):
+
         return Response('Hello django')
 
     def post(self, request, *args, **kwargs):
@@ -35,4 +37,6 @@ class HelloView(ListCreateAPIView):
         user.u_instructions = u_instructions
         user.save()
 
-        return Response("create success")
+        user_serializer = UserSerializer(user)
+
+        return JsonResponse(user_serializer.data)
