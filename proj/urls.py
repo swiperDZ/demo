@@ -16,8 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from App1 import user_apis
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^app1/', include('App1.urls', namespace='app1')),
+    # url(r'^app1/', include('App1.urls', namespace='app1')),
     url(r'^app2/', include('App2.urls', namespace='app2')),
+    url(r'^numberver/', user_apis.number_verification, name='numberver'),
+    url(r'^vcodever/', user_apis.v_code_verification, name='vcodever'),
 ]
